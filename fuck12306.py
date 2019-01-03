@@ -101,7 +101,7 @@ class LoginTic(object):
         form_data = {
             "appid": "otn",
             "username": information.USERNAME,
-            "password": information.PASSWORD,
+            "password": information.PASSWORD
         }
         response = self.session.post(login_url, form_data).json()
         if response['result_code'] == 0:
