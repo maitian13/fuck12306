@@ -146,7 +146,7 @@ class LoginTic(object):
 
 if __name__ == '__main__':
     login = LoginTic()
-    isFromFile = input('是否文件登录：')
+    isFromFile = input('是否使用持久化的session文件登录（1分钟内登录过推荐使用这个方式，使用输入1，不使用输入0）：')
     if isFromFile == "1":
         login.loginFromFile()
     else:
