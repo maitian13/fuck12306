@@ -57,18 +57,24 @@ class Order(object):
 	        print('下单失败2')
 
 	    url = "https://kyfw.12306.cn/otn/confirmPassenger/checkOrderInfo"
+	    passengerTicketStr = ""
+	    oldPassengerStr = ""
+	    for i in range(0, len(information.identity_name)):
+	    	passengerTicketStr = passengerTicketStr + seat_type + ',0,1,' + information.identity_name[i] + ',1,' + information.identity_card[i] + ',,N'
+	    	oldPassengerStr += oldPassengerStr + information.identity_name[i] + ',1,' + information.identity_card[i] + ',1_'
+	    	if i != (len(information.identity_name)-1):
+	    		passengerTicketStr = passengerTicketStr + '_'
 	    data = {
 	        'cancel_flag': '2',
 	        'bed_level_order_num': '000000000000000000000000000000',
-	        'passengerTicketStr': seat_type + ',0,1,' + information.identity_name + ',1,' + information.identity_card + ',,N',
-	        'oldPassengerStr': information.identity_name + ',1,' + information.identity_card + ',1_',
+	        'passengerTicketStr': passengerTicketStr,
+	        'oldPassengerStr': oldPassengerStr,
 	        'tour_flag': 'dc',
 	        'randCode': '',
 	        'whatsSelect': '1',
 	        '_json_att': '',
 	        'REPEAT_SUBMIT_TOKEN': REPEAT_SUBMIT_TOKEN
 	    }
-	    print(seat_type + ',0,1,' + information.identity_name + ',1,' + information.identity_card + ',,N')
 	    print('****************************checkOrderInfo***************************')
 	    r = self.req.post(url=url, data=data, headers=self.headers)
 	    with open('checkOrderInfo.html', 'wb') as f:
@@ -102,8 +108,8 @@ class Order(object):
 
 	    url = "https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue"
 	    data = {
-	        'passengerTicketStr': seat_type + ',0,1,' + information.identity_name + ',1,' + information.identity_card + ',,N',
-	        'oldPassengerStr': information.identity_name + ',1,' + information.identity_card + ',1_',
+	        'passengerTicketStr': passengerTicketStr,
+	        'oldPassengerStr': oldPassengerStr,
 	        'randCode': '',
 	        'purpose_codes': '00',
 	        'key_check_isChange': key_check_isChange,

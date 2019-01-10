@@ -10,6 +10,6 @@ from_station = '北京'
 to_station = '成都'
 train_codes = ['G89', 'G571']
 
-identity_name = 'xx' #乘车人姓名
-identity_card = 'xx'  #身份证号码
-phone_number = 'xx'   #电话号码
+identity_name = ['', ''] #乘车人姓名
+identity_card = ['', '']  #身份证号码
+phone_number = ['', '']   #电话号码
